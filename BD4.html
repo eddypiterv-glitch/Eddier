@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Buenos días ✨</title>
+  <style>
+    :root{
+      --bg1:#0b1020; --bg2:#1a2a6c; --bg3:#b21f1f; --bg4:#fdbb2d;
+      --txt: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --radius: 20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, noting: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--txt);
+      overflow:hidden;
+      background:
+        radial-gradient(1200px 800px at 20% 15%, rgba(124,247,255,.22), transparent 55%),
+        radial-gradient(900px 700px at 80% 25%, rgba(255,123,212,.16), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+      background-size: 140% 140%;
+      animation: bgMove 16s ease-in-out infinite alternate;
+    }
+    @keyframes bgMove{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+
+    .wrap{
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding:12px;
+    }
+    .card{
+      width:min(920px, 96vw);
+      height:min(570px, calc(100vh - 24px));
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height:1.05;
+    }
+    .badge{
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      color: var(--muted);
+      font-size: 12px;
+      white-space:nowrap;
+      height:fit-content;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:10px;
+      flex:1;
+      min-height:0;
+    }
+    @media (max-width: 760px){
+      .card{height:min(690px, calc(100vh - 24px))}
+      .grid{grid-template-columns:1fr}
+    }
+
+    .panel{
+      border-radius: calc(var(--radius) - 6px);
+      padding:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.14);
+      min-height:0;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel h2{
+      margin:0 0 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing:.35px;
+      text-transform: uppercase;
+    }
+
+    .line{
+      margin:6px 0 10px;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height:1.25;
+    }
+    .quote{
+      margin:0 0 8px;
+      font-size: clamp(14px, 1.8vw, 18px);
+      line-height:1.25;
+      color: rgba(255,255,255,.86);
+    }
+    .toy{
+      display:inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(124,247,255,.14);
+      border: 1px solid rgba(124,247,255,.22);
+      animation: wiggle 2.2s ease-in-out infinite;
+      transform-origin: left center;
+    }
+    @keyframes wiggle{0%,100%{transform: rotate(-1deg)}50%{transform: rotate(2deg)}}
+
+    .ctaRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+      align-items:center;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,247,255,.22), rgba(255,123,212,.16));
+      color: rgba(255,255,255,.95);
+      font-weight: 750;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+      user-select:none;
+      transition: transform .12s ease, filter .12s ease;
+    }
+    button:hover{transform: translateY(-1px); filter: brightness(1.05)}
+    button:active{transform: translateY(1px) scale(.99)}
+    .ghost{background: rgba(255,255,255,.08); font-weight: 680}
+
+    .hint{
+      margin:10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.25;
+    }
+
+    .bubble{
+      padding:10px 12px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.14);
+      font-size: 13px;
+      text-align:center;
+      line-height:1.25;
+      animation: floaty 4.8s ease-in-out infinite alternate;
+      min-height: 52px;
+      display:grid;
+      place-items:center;
+    }
+    @keyframes floaty{0%{transform:translateY(0)}100%{transform:translateY(-7px)}}
+
+    .planet{
+      width:120px;height:120px;border-radius:50%;
+      margin:8px auto 0;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), rgba(255,255,255,0) 55%),
+        radial-gradient(circle at 70% 60%, rgba(124,247,255,.20), rgba(124,247,255,0) 60%),
+        radial-gradient(circle at 40% 75%, rgba(255,123,212,.14), rgba(255,123,212,0) 60%),
+        rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow: 0 18px 40px rgba(0,0,0,.30);
+      animation: spin 10s linear infinite;
+      position:relative;
+    }
+    .ring{
+      position:absolute;
+      inset:-14px;
+      border-radius:50%;
+      border: 2px dashed rgba(255,255,255,.22);
+      animation: spin 7s linear infinite reverse;
+    }
+    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+    /* Slider */
+    .sliderRow{
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+      color: rgba(255,255,255,.84);
+      font-size: 12.5px;
+    }
+    input[type="range"]{
+      width:100%;
+      accent-color: rgba(124,247,255,.9);
+      cursor:pointer;
+    }
+    .rangeLabels{
+      display:flex;
+      justify-content:space-between;
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    /* Stars */
+    .star{
+      position:absolute;
+      width:9px;height:9px;
+      border-radius: 2px;
+      pointer-events:none;
+      opacity: 0;
+      transform: translate(-50%,-50%) scale(.9);
+      background: white;
+      box-shadow: 0 0 14px rgba(124,247,255,.5), 0 0 22px rgba(255,123,212,.25);
+      animation: pop 850ms ease-out forwards;
+    }
+    @keyframes pop{
+      0%{opacity:0; transform: translate(-50%,-50%) scale(.4)}
+      15%{opacity:1}
+      100%{opacity:0; transform: translate(-50%,-110%) scale(1.15)}
+    }
+
+    /* Confetti */
+    .confetti{
+      position:absolute;
+      top:-18px;
+      font-size: 15px;
+      opacity: 0;
+      animation: fall 1200ms ease-out forwards;
+      pointer-events:none;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
+    }
+    @keyframes fall{
+      0%{opacity:0; transform: translateY(-12px) rotate(0deg)}
+      15%{opacity:1}
+      100%{opacity:0; transform: translateY(170px) rotate(22deg)}
+    }
+
+    .footer{
+      color: rgba(255,255,255,.68);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    .smallTag{
+      display:inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.78);
+      font-size: 11px;
+      margin-left:6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="wrap">
+    <div class="card" id="card">
+      <div class="top">
+        <h1 id="headline">Buen día ✨</h1>
+        <div class="badge" id="badge">coquetería: <b>suave</b> 😌</div>
+      </div>
+
+      <div class="grid">
+        <section class="panel" aria-label="mensaje principal">
+          <h2>Mensaje del día <span class="smallTag" id="timeTag">hoy</span></h2>
+
+          <p class="line" id="line1">
+            Buenos días 🙂 Solo pasaba a desearte un día bonito… de esos donde todo fluye y sonríes sin darte cuenta.
+          </p>
+
+          <p class="quote" id="quote1">
+            Ojalá el café te salga rico, el clima te trate bien y alguien (yo) te saque una sonrisa en el proceso.
+          </p>
+
+          <p class="quote" id="quote2">
+            <span class="toy">Toy Story</span>
+            me recordó algo: las mejores aventuras empiezan con buena compañía… así que hoy te mando vibra de “equipo”. 🚀
+          </p>
+
+          <div class="ctaRow">
+            <button id="btnSurprise">Mini sorpresa 🎁</button>
+            <button id="btnNext" class="ghost">Siguiente ➜</button>
+            <button id="btnRain" class="ghost">Lluvia de ✨</button>
+            <button id="btnChallenge" class="ghost">Reto 10s ⏳</button>
+          </div>
+
+          <div class="sliderRow">
+            <div><b>Ajusta la coquetería</b> (suavecito, sin pasarse):</div>
+            <input id="flirtRange" type="range" min="0" max="2" step="1" value="0" />
+            <div class="rangeLabels">
+              <span>tranqui</span><span>coqueto</span><span>coquetito+</span>
+            </div>
+          </div>
+
+          <p class="hint">
+            Tip: toca/clic dentro de la tarjeta para estrellitas ✨. <br/>
+            Secreto: toca el planeta <b>5 veces</b> 👀
+          </p>
+        </section>
+
+        <aside class="panel" aria-label="interactivo">
+          <h2>Interacción</h2>
+          <div class="planet" id="planet" title="tócame" aria-label="planeta brillante">
+            <div class="ring"></div>
+          </div>
+          <div class="bubble" id="bubble">Presiona “Mini sorpresa” 👀</div>
+        </aside>
+      </div>
+
+      <div class="footer">Hecho para sacarte una sonrisa discreta 😄</div>
+    </div>
+  </div>
+
+  <script>
+    const wrap = document.getElementById('wrap');
+    const card = document.getElementById('card');
+    const planet = document.getElementById('planet');
+    const bubble = document.getElementById('bubble');
+
+    const headline = document.getElementById('headline');
+    const badge = document.getElementById('badge');
+    const timeTag = document.getElementById('timeTag');
+
+    const line1 = document.getElementById('line1');
+    const quote1 = document.getElementById('quote1');
+    const quote2 = document.getElementById('quote2');
+
+    const btnSurprise = document.getElementById('btnSurprise');
+    const btnNext = document.getElementById('btnNext');
+    const btnRain = document.getElementById('btnRain');
+    const btnChallenge = document.getElementById('btnChallenge');
+    const flirtRange = document.getElementById('flirtRange');
+
+    // Hora (solo etiqueta suave)
+    const h = new Date().getHours();
+    timeTag.textContent = (h < 12) ? "mañana" : (h < 19) ? "tarde" : "noche";
+
+    // Mensajes por nivel
+    const sets = [
+      { // 0 tranqui
+        badge: "suave 😌",
+        baseLine: "Buenos días 🙂 Solo pasaba a desearte un día bonito… de esos donde todo fluye y sonríes sin darte cuenta.",
+        baseQ1: "Ojalá el café te salga rico, el clima te trate bien y alguien (yo) te saque una sonrisa en el proceso.",
+        baseQ2: "Toy Story me recordó algo: las mejores aventuras empiezan con buena compañía… así que hoy te mando vibra de “equipo”. 🚀",
+        surprises: [
+          "Dato random: hoy tu misión es sonreír 2 segundos. Si sale, ya ganaste. ✅🙂",
+          "Te mando buena vibra para que el café te salga rico y el día te salga mejor. ☕✨",
+          "Hoy: cero presión, pero sí muchas ganas de que te vaya bien. 🙌",
+          "Si el día se pone pesado, yo me ofrezco como proveedor oficial de mensajes bonitos.",
+          "Modo ‘tranqui’: a tu ritmo, pero con buen ánimo. 🐢💛"
+        ],
+        nexts: [
+          "Buenos días 🙂 Que hoy te pase algo bonito, aunque sea chiquito.",
+          "Hoy te deseo paz + una risa inesperada. Eso ya es un buen combo.",
+          "Si te distraes, que sea por algo lindo (como un buen playlist). 🎧"
+        ],
+        bubbles: [
+          "Ok, mensaje enviado. Ahora sonríe aunque sea poquito 😄",
+          "Vibra bonita entregada ✅",
+          "Listo. Te dejo una estrellita extra ✨"
+        ]
+      },
+      { // 1 coqueto
+        badge: "coqueto 😄",
+        baseLine: "Buenos días 😄 Solo vengo a decirte que ojalá tu día sea tan bonito como tu forma de sonreír (sin presión, pero sí).",
+        baseQ1: "Si hoy te da flojera, yo apoyo el modo ‘vamos viendo’… pero con una sonrisa de regalo.",
+        baseQ2: "Toy Story: cuando haces equipo, todo se siente más fácil. Considera esto un ‘buen día’ con vibra de aliado. 🤝✨",
+        surprises: [
+          "No sé si es el clima, pero hoy me dieron ganas de escribirte. 🙂",
+          "Pequeña advertencia: pensar en ti sube el ánimo (comprobado por mí).",
+          "Si hoy te sonríe el día, yo me adjudico un 1% por intención. 😄",
+          "Hoy te queda bien: estar tranquila, ser tú y seguir brillando suavecito. ✨",
+          "Yo no interrumpo… solo aparezco a recordarte que me caes muy bien."
+        ],
+        nexts: [
+          "Buenos días 😄 Si te ríes hoy, me cuentas el chisme (prometo escuchar).",
+          "Te deseo un día bonito… y si no sale, lo volvemos a intentar mañana. Trato. 🤝",
+          "Hoy te mando un ‘buen día’ con un poquito de coquetería decente."
+        ],
+        bubbles: [
+          "Ok… eso fue un poquito coqueto 😌",
+          "Mensaje entregado: 10/10 vibra bonita.",
+          "Si sonríes, misión cumplida ✅🙂"
+        ]
+      },
+      { // 2 coquetito+
+        badge: "coquetito+ 😳",
+        baseLine: "Buenos días 😳 Me da risa lo fácil que es que me ganes con una sonrisa… así que te deseo un día bonito (y uno que otro momento lindo).",
+        baseQ1: "Si hoy te sale bien, me alegro contigo. Y si no, igual aquí va un empujoncito de buen ánimo. 🙌",
+        baseQ2: "Toy Story: las aventuras buenas necesitan alguien que te diga ‘vamos’. Hoy: vamos. 🚀✨",
+        surprises: [
+          "Hoy te mando un ‘buen día’ y me guardo las ganas de verte para después. 😄",
+          "Si te llego a sacar una sonrisa hoy, yo ya me doy por bien servido.",
+          "No voy a exagerar… pero tu vibe mejora el día. Bastante.",
+          "Ojalá hoy te pase algo bonito. Si no pasa, luego te cuento un chiste malo. 😌",
+          "Voy a decirlo suave: me gusta hablar contigo."
+        ],
+        nexts: [
+          "Buenos días 😄 Si hoy te cruzas con algo lindo, acuérdate que tú también lo eres (ups).",
+          "Te deseo un día bonito… y una excusa para sonreír (si quieres, yo me ofrezco).",
+          "Hoy ando en modo ‘coquetito pero educado’. 😌"
+        ],
+        bubbles: [
+          "Uy… eso sí fue coquetito 😳",
+          "Ok, me pasé 1%… pero con respeto 😄",
+          "Mensaje enviado. Si sonríes, yo feliz."
+        ]
+      }
+    ];
+
+    let level = 0;
+    let idx = 0;
+    let planetClicks = 0;
+    let challengeRunning = false;
+
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    function applyLevel(n){
+      level = n;
+      const s = sets[level];
+      badge.innerHTML = `coquetería: <b>${s.badge}</b>`;
+      line1.textContent = s.baseLine;
+      quote1.textContent = s.baseQ1;
+      quote2.innerHTML = `<span class="toy">Toy Story</span> ${s.baseQ2.replace("Toy Story:", "").trim()}`;
+      bubble.textContent = "Presiona “Mini sorpresa” 👀";
+      idx = 0;
+    }
+
+    function confetti(count=10){
+      for(let i=0;i<count;i++){
+        const el = document.createElement('div');
+        el.className = 'confetti';
+        el.textContent = (Math.random() > 0.45) ? '✨' : '🙂';
+        el.style.left = (10 + Math.random()*80) + '%';
+        el.style.animationDelay = (Math.random()*160) + 'ms';
+        card.appendChild(el);
+        setTimeout(()=> el.remove(), 1300);
+      }
+    }
+
+    // Estrellitas al tocar/clic dentro de la tarjeta
+    function makeStar(x,y){
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = x + 'px';
+      s.style.top = y + 'px';
+      card.appendChild(s);
+      setTimeout(()=> s.remove(), 900);
+    }
+    wrap.addEventListener('pointerdown', (e) => {
+      if(e.target.tagName === 'BUTTON' || e.target === flirtRange) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if(x >= 0 && y >= 0 && x <= rect.width && y <= rect.height){
+        for(let i=0;i<6;i++){
+          makeStar(x + (Math.random()*22-11), y + (Math.random()*22-11));
+        }
+      }
+    });
+
+    // Botones
+    btnSurprise.addEventListener('click', () => {
+      const s = sets[level];
+      bubble.textContent = pick(s.surprises);
+      confetti(12);
+    });
+
+    btnNext.addEventListener('click', () => {
+      const s = sets[level];
+      bubble.textContent = s.nexts[idx % s.nexts.length];
+      idx++;
+      confetti(6);
+    });
+
+    btnRain.addEventListener('click', () => {
+      // lluvia de estrellitas dentro de la tarjeta
+      const rect = card.getBoundingClientRect();
+      for(let i=0;i<24;i++){
+        const x = 30 + Math.random()*(rect.width-60);
+        const y = 60 + Math.random()*(rect.height-120);
+        makeStar(x,y);
+      }
+      bubble.textContent = "✨ Lluvia de estrellitas activada ✨";
+    });
+
+    btnChallenge.addEventListener('click', () => {
+      if(challengeRunning) return;
+      challengeRunning = true;
+      let t = 10;
+      bubble.textContent = `Reto: sonríe 2 seg… y respira. Empezamos en ${t}…`;
+      const timer = setInterval(() => {
+        t--;
+        if(t > 0){
+          bubble.textContent = `Reto: 2 segundos de sonrisa 😄  (quedan ${t}s)`;
+        }else{
+          clearInterval(timer);
+          const endMsg = (level === 0)
+            ? "Listo ✅ Si sonreíste, ya ganaste el día (aunque sea un poquito)."
+            : (level === 1)
+              ? "Listo ✅ Si sonreíste, me debes un ‘ya’ 😄"
+              : "Listo ✅ Si sonreíste… yo también. 😌";
+          bubble.textContent = endMsg;
+          confetti(14);
+          challengeRunning = false;
+        }
+      }, 1000);
+    });
+
+    // Slider coquetería
+    flirtRange.addEventListener('input', (e) => {
+      applyLevel(Number(e.target.value));
+      confetti(8);
+    });
+
+    // Secreto: 5 clicks al planeta
+    planet.addEventListener('click', () => {
+      planetClicks++;
+      const s = sets[level];
+      if(planetClicks < 5){
+        bubble.textContent = `Secreto en progreso… (${planetClicks}/5) 👀`;
+      }else{
+        planetClicks = 0;
+        bubble.textContent = (level === 0)
+          ? "Secreto desbloqueado: hoy te mereces un día bonito y tranquilo. Y sí, me acordé de ti. 🙂✨"
+          : (level === 1)
+            ? "Secreto desbloqueado: me caes MUY bien. (Y lo digo con cara seria 😄) "
+            : "Secreto desbloqueado: ok… me gusta hablar contigo. Fin del comunicado 😌";
+        confetti(16);
+      }
+    });
+
+    // Inicial
+    applyLevel(0);
+  </script>
+</body>
+</html>
